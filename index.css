@@ -157,7 +157,7 @@
  
     .about-avatar {
       width: 100%;
-      max-width: 360px;
+      max-width: 500px;
       aspect-ratio: 1;
       background-color: #111;
       border: 1px solid rgba(226, 201, 126, 0.2);
@@ -166,6 +166,10 @@
       align-items: center;
       justify-content: center;
       font-size: 6rem;
+    }
+    .about-avatar img{
+        width: 400px;
+        border-radius: 15px;
     }
  
     .about-text {
@@ -234,6 +238,8 @@
       height: 100%;
       background: linear-gradient(90deg, #e2c97e, #c8a84b);
       border-radius: 99px;
+      width: 0;
+      animation: fillBar 2s ease forwards;
     }
     #projects h1{
         text-align: center;
@@ -253,10 +259,11 @@
         overflow: hidden;
         text-align: center;
         padding-bottom: 20px;
-        transition: 0.3s ease;
+        transition: all 0.3s ease;
     }
     .project-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-12px) scale(1.03);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     }
 
     .project-card img {
@@ -274,11 +281,29 @@
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
     }
 
     .project-btn:hover {
     background: #005ad1;
     }
+    .project-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #005ad1;
+    transition: 0.3s;
+    z-index: -1;
+    }
+
+.project-btn:hover::before {
+  left: 0;
+}
     #contact p{
         text-align: center;
     }
@@ -300,7 +325,7 @@
 
     .contact-icons a:hover {
         color: #0077ff;
-        transform: translateY(-5px);
+        transform: scale(1.2) rotate(8deg); 
     }
     
     footer {
@@ -322,6 +347,49 @@
       text-align: center;
     }
  
+    @keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-tag {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.hero-name {
+  animation: fadeUp 1s ease forwards;
+}
+
+.hero-title {
+  animation: fadeUp 1.2s ease forwards;
+}
+
+.hero-text {
+  animation: fadeUp 1.4s ease forwards;
+}
+
+.hero-buttons {
+  animation: fadeUp 1.6s ease forwards;
+}
+
+nav {
+  animation: slideDown 0.8s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
     @media (max-width: 1024px) {
   .hero-name {
     font-size: 3.5rem;
@@ -343,6 +411,22 @@
   section {
     padding: 5rem 6%;
   }
+}
+
+@keyframes fillBar {
+  to {
+    width: var(--width);
+  }
+}
+.hidden {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 @media (max-width: 768px) {
   nav {
